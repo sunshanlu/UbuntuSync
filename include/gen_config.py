@@ -9,6 +9,7 @@
     python3 gen_config.py "https://example.com/api/v1/client/subscribe?token=xxx" ~/.config/mihomo/config.yaml
 """
 import base64
+import os
 import sys
 import urllib.parse
 import urllib.request
@@ -135,7 +136,7 @@ def generate_config(proxies):
         "mode": "rule",
         "log-level": "info",
         "external-controller": "127.0.0.1:9090",
-        "external-ui": "~/.config/mihomo/ui",
+        "external-ui": os.path.expanduser("~/.config/mihomo/ui"),
         "proxies": proxies,
         "proxy-groups": [
             {
