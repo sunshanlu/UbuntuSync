@@ -86,12 +86,12 @@ for name in localsend wechat qq chrome vscode ccswitch; do
     echo "[$i/$TOTAL] Installing $name..."
     if use_proxy "$name"; then
         echo "  Using proxy..."
-        if ! curl -x http://127.0.0.1:7890 -fSL --retry 3 --retry-delay 5 "$url" -o "$deb_file"; then
+        if ! curl -x http://127.0.0.1:7890 -fSL --retry 3 --retry-delay 5 --connect-timeout 15 --speed-limit 1 --speed-time 10 "$url" -o "$deb_file"; then
             echo "  Download failed, skipping."
             continue
         fi
     else
-        if ! curl -fSL --retry 3 --retry-delay 5 "$url" -o "$deb_file"; then
+        if ! curl -fSL --retry 3 --retry-delay 5 --connect-timeout 15 --speed-limit 1 --speed-time 10 "$url" -o "$deb_file"; then
             echo "  Download failed, skipping."
             continue
         fi
