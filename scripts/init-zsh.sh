@@ -58,7 +58,7 @@ cp "$SCRIPT_DIR/../include/starship.toml" "$HOME/.config/starship.toml"
 
 # Set zsh as default shell
 echo "Setting zsh as default shell..."
-chsh -s $(which zsh)
+sudo chsh -s "$(which zsh)" "$USER"
 
 echo ""
 echo "========================================="
