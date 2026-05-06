@@ -153,11 +153,24 @@ main() {
     start_mihomo
     setup_zshrc
 
+    # ---------- 测试代理 ----------
+    echo ""
+    echo "[7+/7] Testing proxy..."
+    export http_proxy=http://127.0.0.1:7890
+    export https_proxy=http://127.0.0.1:7890
+    export all_proxy=socks5://127.0.0.1:7891
+    export no_proxy=localhost,127.0.0.1
+    if curl -sI --max-time 10 https://www.google.com > /dev/null 2>&1; then
+        echo "  Proxy is working!"
+    else
+        echo "  WARNING: Proxy test failed, please check your subscription URL"
+    fi
+    unset http_proxy https_proxy all_proxy no_proxy
+
     echo ""
     echo "========================================="
     echo "  Installation complete!"
     echo ""
-    echo "  测试代理:  proxy_on && curl -I https://google.com"
     echo "  Web UI:    http://127.0.0.1:9090/ui/"
     echo "  更新订阅:  mihomo-update"
     echo "========================================="

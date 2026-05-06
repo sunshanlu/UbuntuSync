@@ -5,7 +5,7 @@ TMP_DIR=$(mktemp -d)
 MIHOMO_STARTED=false
 
 # Need mihomo proxy for reliable download
-PROXY_PACKAGES="chrome vscode"
+PROXY_PACKAGES="localsend chrome vscode"
 
 start_proxy() {
     if pgrep -x mihomo > /dev/null; then
@@ -53,6 +53,16 @@ declare -A PACKAGES=(
     [ccswitch]="https://ghfast.top/https://github.com/farion1231/cc-switch/releases/download/v3.14.1/CC-Switch-v3.14.1-Linux-x86_64.deb"
 )
 
+# dpkg package names (may differ from display names)
+declare -A PKG_NAMES=(
+    [localsend]="localsend"
+    [wechat]="wechat"
+    [qq]="linuxqq"
+    [chrome]="google-chrome-stable"
+    [vscode]="code"
+    [ccswitch]="cc-switch"
+)
+
 TOTAL=${#PACKAGES[@]}
 echo "========================================="
 echo "  Deb Package Installer"
@@ -68,7 +78,7 @@ for name in localsend wechat qq chrome vscode ccswitch; do
     url="${PACKAGES[$name]}"
     deb_file="$TMP_DIR/${name}.deb"
 
-    if dpkg -l "$name" &>/dev/null; then
+    if dpkg -l "${PKG_NAMES[$name]}" &>/dev/null; then
         echo "[$i/$TOTAL] $name already installed, skipping."
         continue
     fi
