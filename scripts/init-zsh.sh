@@ -45,7 +45,7 @@ else
         *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
     # Use ghproxy mirror for faster download in China
-    curl -fsSL "https://ghfast.top/https://github.com/starship/starship/releases/latest/download/starship-${ARCH}-unknown-linux-gnu.tar.gz" -o /tmp/starship.tar.gz
+    curl -fsSL --retry 3 --retry-delay 5 "https://ghfast.top/https://github.com/starship/starship/releases/latest/download/starship-${ARCH}-unknown-linux-gnu.tar.gz" -o /tmp/starship.tar.gz
     sudo tar -xzf /tmp/starship.tar.gz -C /usr/local/bin
     rm /tmp/starship.tar.gz
 fi

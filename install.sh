@@ -22,7 +22,7 @@ if git clone --depth=1 "$REPO_URL" "$WORK_DIR/UbuntuSync" 2>/dev/null; then
 else
     echo "  git clone failed, falling back to zip download..."
     ZIP_URL="https://ghfast.top/https://github.com/sunshanlu/UbuntuSync/archive/refs/heads/master.zip"
-    curl -fSL "$ZIP_URL" -o "$WORK_DIR/master.zip"
+    curl -fSL --retry 3 --retry-delay 5 "$ZIP_URL" -o "$WORK_DIR/master.zip"
     unzip -q "$WORK_DIR/master.zip" -d "$WORK_DIR"
     SCRIPT_DIR="$WORK_DIR/UbuntuSync-master/scripts"
     echo "  Downloaded via zip."

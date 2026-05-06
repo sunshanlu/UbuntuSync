@@ -34,7 +34,7 @@ install_mihomo() {
     fi
 
     echo "[2/7] Installing mihomo ${MIHOMO_VERSION}..."
-    curl -L -o /tmp/mihomo.gz "$MIHOMO_URL"
+    curl -L --retry 3 --retry-delay 5 -o /tmp/mihomo.gz "$MIHOMO_URL"
     gunzip -f /tmp/mihomo.gz
     chmod +x /tmp/mihomo
     mkdir -p "$BIN_DIR"
@@ -71,7 +71,7 @@ install_yacd() {
     fi
 
     echo "[5/7] Installing Yacd Web UI..."
-    curl -sL "$YACD_URL" -o /tmp/yacd.tar.xz
+    curl -sL --retry 3 --retry-delay 5 "$YACD_URL" -o /tmp/yacd.tar.xz
     mkdir -p "$CONFIG_DIR/ui"
     tar xf /tmp/yacd.tar.xz -C "$CONFIG_DIR/ui" --strip-components=1
     rm -f /tmp/yacd.tar.xz

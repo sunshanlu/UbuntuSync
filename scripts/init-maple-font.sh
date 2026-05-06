@@ -16,7 +16,7 @@ echo "========================================="
 
 # Step 1: Download zip
 echo "[1/3] Downloading ${FONT_ZIP}..."
-curl -fSL "$FONT_URL" -o "$TMP_DIR/$FONT_ZIP"
+curl -fSL --retry 3 --retry-delay 5 "$FONT_URL" -o "$TMP_DIR/$FONT_ZIP"
 
 # Step 2: Extract to font directory
 echo "[2/3] Extracting fonts..."

@@ -22,7 +22,7 @@ mkdir -p "$THEME_DIR"
 if [ -d "$THEME_DIR/winter" ]; then
     echo "  Theme already installed, skipping."
 else
-    curl -fSL "https://ghfast.top/https://github.com/thep0y/fcitx5-themes-candlelight/archive/refs/heads/main.zip" -o /tmp/fcitx5-theme-candlelight.zip
+    curl -fSL --retry 3 --retry-delay 5 "https://ghfast.top/https://github.com/thep0y/fcitx5-themes-candlelight/archive/refs/heads/main.zip" -o /tmp/fcitx5-theme-candlelight.zip
     unzip -q /tmp/fcitx5-theme-candlelight.zip -d /tmp/fcitx5-theme-candlelight
     cp -r /tmp/fcitx5-theme-candlelight/fcitx5-themes-candlelight-main/winter "$THEME_DIR/"
     rm -rf /tmp/fcitx5-theme-candlelight /tmp/fcitx5-theme-candlelight.zip
